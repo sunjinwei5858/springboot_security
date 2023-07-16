@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
  * @program: com.sunjinwei.springboot_security.component
  * @author: sun jinwei
  * @create: 2023-07-16 15:02
- * @description:
+ * @description: 未认证/未授权的处理
  **/
 @Component
 public class SecurityExceptionHandler implements AccessDeniedHandler, AuthenticationEntryPoint {
@@ -37,6 +37,7 @@ public class SecurityExceptionHandler implements AccessDeniedHandler, Authentica
         response.setContentType("application/json; charset=utf-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         String msg = "invalid token";
+        // 还可以做一些重定向的处理 比如跳到登陆页面
         response.getOutputStream().write(JSON.toJSONString(msg).getBytes(StandardCharsets.UTF_8));
 
     }

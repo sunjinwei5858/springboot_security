@@ -1,5 +1,6 @@
 package com.sunjinwei.springboot_security.config;
 
+import com.sunjinwei.springboot_security.component.SecurityExceptionHandler;
 import com.sunjinwei.springboot_security.filter.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +25,20 @@ public class WebSecurityConfig {
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
+    @Autowired
+    private SecurityExceptionHandler securityExceptionHandler;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        return http.csrf().disable()
+        return http
+                .exceptionHandling()
+                // 授权失败的处理
+                .accessDeniedHandler(securityExceptionHandler)
+                // 未认证的处理
+                .authenticationEntryPoint(securityExceptionHandler)
+                .and()
+                .csrf().disable()
                 .formLogin().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
