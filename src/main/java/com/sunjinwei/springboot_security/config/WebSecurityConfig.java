@@ -44,7 +44,7 @@ public class WebSecurityConfig {
                 .and()
                 .requestCache().disable()
                 .headers().disable()
-                .authorizeRequests()
+                .authorizeRequests().anyRequest().authenticated()
                 .and()
                 // 配置过滤器
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)

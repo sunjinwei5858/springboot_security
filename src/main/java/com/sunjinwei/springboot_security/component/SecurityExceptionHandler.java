@@ -55,7 +55,7 @@ public class SecurityExceptionHandler implements AccessDeniedHandler, Authentica
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
 
         response.setContentType("application/json; charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         String msg = "access forbidden";
         response.getOutputStream().write(JSON.toJSONString(msg).getBytes(StandardCharsets.UTF_8));
     }
