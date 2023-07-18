@@ -1,1 +1,11 @@
-
+server:
+  port: 8080
+spring:
+  application:
+    name: springboot_security
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/demo?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+    name: demo
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
